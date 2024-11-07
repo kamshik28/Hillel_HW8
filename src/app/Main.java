@@ -7,6 +7,7 @@ public class Main {
     static double balance;
 
     public static void main(String[] args) {
+        balance = getBalance(); // Ініціалізуємо баланс
         validateAmount(balance, getAmount());
     }
 
@@ -15,30 +16,28 @@ public class Main {
     }
 
     private static double getAmount() {
-        System.out.printf("Balance is USD %.2f.%n" +
-                "Enter purchase amount, USD: ", balance);
+        System.out.printf("Balance is USD %.2f.%nEnter purchase amount, USD: ", balance);
         Scanner scanner = new Scanner(System.in);
         return scanner.nextDouble();
     }
 
     // Метод валідації наявних коштів
     private static void validateAmount(double balance, double withdrawal) {
-        if (withdrawal > ) {
+        if (withdrawal > balance) {
             try {
-                throw new ("Insufficient funds!");
+                throw new FundsException("Insufficient funds!");
             } catch (FundsException ex) {
-                System.out.println(.getMessage());
+                System.out.println(ex.getMessage());
             }
         } else {
             balance = getBalance(balance, withdrawal);
-            System.out.printf("Funds are OK. Purchase paid." +
-                    "%nBalance is USD %.2f", balance);
+            System.out.printf("Funds are OK. Purchase paid.%nBalance is USD %.2f%n", balance);
         }
     }
 
     // Метод розрахунку наявних коштів на рахунку
     // після зняття певної суми коштів
     private static double getBalance(double balance, double withdrawal) {
-        return balance - ;
+        return balance - withdrawal;
     }
 }
